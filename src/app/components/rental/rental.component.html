@@ -1,0 +1,52 @@
+<div class="card mb-3" style="max-width: 1024px; margin-top: 20px;">
+    <div class="row g-0">
+      <div class="col-md-5">
+        <table *ngIf="car" class="table table-striped mt-2">
+            <tbody>
+              <tr>
+                <th scope="row">Marca</th>
+                <td>{{ car.brandName }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Modelo</th>
+                <td>{{ car.carName }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Cor</th>
+                <td>{{ car.colorName }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Preço diário</th>
+                <td>
+                  {{
+                    car.dailyPrice | currency: "TRY":"symbol-narrow":"1.2-2"
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Ano modelo</th>
+                <td>{{car.modelYear}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Descrição</th>
+                <td>{{ car.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="col-md-7" style="position: relative;">
+        <div class="card-body">
+            <form class="list-group-item active">
+                <label>Data de início</label><label style="margin-left: 95px;">Data final</label>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group me-5" role="group" aria-label="First group"><input type="date" (change)="calculatePrice()" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"></div>
+                    <div class="btn-group me-5" role="group" aria-label="First group"><input type="date" (change)="calculatePrice()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}"></div>
+                </div>
+                <br><br>
+                <div><p *ngIf="endDate && startDate">Taxa total: {{rentPrice | currency:"TRY":"symbol-narrow":"1.2-2"}}</p></div>
+            </form>
+        </div>
+          <button (click)="addRental(rental)" type="button" class="btn btn-success" style="position:absolute; bottom:20px; right:20px;">Salvar</button>
+      </div>
+    </div>
+  </div>
